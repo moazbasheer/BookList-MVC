@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +16,26 @@ namespace WebApplication2.Controllers
         public readonly ApplicationDbContext _db;
         [BindProperty]
         public Book Book { set; get; }
+
         public BooksController(ApplicationDbContext db)
         {
             _db = db;
         }
         public IActionResult Index()
         {
-           return View();
+            if (HttpContext.Session.Get("email") == null)
+            {
+                return RedirectToAction("Login", "Users", new {area = ""});
+            }
+            return View();
         }
 
         public IActionResult Upsert(int? id)
         {
+            if (HttpContext.Session.Get("email") == null)
+            {
+               return RedirectToAction("Login", "Users", new { area = "" });
+            }
             Book = new Book();
             if (id == null)
             {
@@ -43,6 +54,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult Upsert()
         {
+
             if(ModelState.IsValid)
             {
                 if(Book.Id == 0) // insert

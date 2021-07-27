@@ -13,5 +13,6 @@ namespace WebApplication2.Models
 
         }
         public DbSet<Book> Books { set; get; }
+        public DbSet<User> Users { set; get; }
     }
 }

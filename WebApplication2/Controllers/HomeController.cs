@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,11 +21,19 @@ namespace WebApplication2.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.Get("email") == null)
+            {
+                return RedirectToAction("Login", "Users", new { area = "" });
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
+            if (HttpContext.Session.Get("email") == null)
+            {
+               return RedirectToAction("Login", "Users", new { area = "" });
+            }
             return View();
         }
 

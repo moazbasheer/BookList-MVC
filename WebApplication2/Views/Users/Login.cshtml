@@ -1,0 +1,14 @@
+﻿@model WebApplication2.Models.User
+<form method="post">
+    <div>
+        <label asp-for="email"></label>
+        <input type="email" asp-for="email" class="form-control" />
+    </div>
+    <div>
+        <label asp-for="password"></label>
+        <input type="password" asp-for="password" class="form-control" />
+    </div>
+    <div>
+        <input type="submit" value="login" class="btn btn-primary" />
+    </div>
+</form>
