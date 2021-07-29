@@ -8,7 +8,7 @@ namespace WebApplication2.Models
 {
     public class Book
     {
-        [Key]
+        [Key] //not required 
         public int Id { set; get; }
         [Required]
         public string Name{ set; get; }
