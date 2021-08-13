@@ -34,13 +34,13 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public IActionResult Login(User User)
         {
-            var user = _db.Users.FirstOrDefault(e => e.email == User.email && e.password == User.password);
+            var user = _db.Users.FirstOrDefault(e => e.Email == User.Email && e.Password == User.Password);
             if(user == null)
             {
                 // not a user.
                 return View();
             }
-            HttpContext.Session.SetString("email", user.email);
+            HttpContext.Session.SetString("email", user.Email);
             
             // a user
             return RedirectToAction("Index", "Books", new { area = "" });
@@ -48,6 +48,8 @@ namespace WebApplication2.Controllers
 
         public IActionResult Register()
         {
+            //This would be repeated every where
+            //violates DRY principle 
             if (HttpContext.Session.Get("email") != null)
             {
                 return RedirectToAction("Index", "Books", new { area = "" });

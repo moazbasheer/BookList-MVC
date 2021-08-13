@@ -8,13 +8,13 @@ namespace WebApplication2.Models
 {
     public class User
     {
-        [Key]
+        [Key] //Not required
         public int Id { set; get; }
         [Required]
-        public string name { set; get; }
+        public string Name { set; get; }
         [Required]
-        public string email { set; get; }
+        public string Email { set; get; }
         [Required]
-        public string password { set; get; }
+        public string Password { set; get; }
     }
 }

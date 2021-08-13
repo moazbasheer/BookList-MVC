@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
+    //Not protected from public users ?
     public class BooksController : Controller
     {
 
@@ -83,10 +80,11 @@ namespace WebApplication2.Controllers
             var book = await _db.Books.FindAsync(id);
             if(book == null)
             {
-                return Json(new { success = false, message = "Not found" });
+                return NotFound();
             }
             _db.Books.Remove(book);
             await _db.SaveChangesAsync();
+            //Oreturn Ok()
             return Json(new { success=true, message="successfully deleted" });
         }
         #endregion
